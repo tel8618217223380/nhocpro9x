@@ -1,0 +1,71 @@
+Ưu điểm:Không phải nói cũng biết là quá nhiều ưu điểm so với việc phải tự tay vẽ ra từng thứ. Kể cả các chuyên mục con ở phía trong chuyên mục lớn. Và khi lập thêm chuyên mục mới cũng chẳng cần phải động tay chân làm gì.
+Khuyết điểm: Không có sự khác biệt hoàn toàn giữa các chuyên mục bởi việc này chỉ tự tay mới làm được Và những bạn nào forum không có chuyên mục con sẽ không áp dụng được.
+Demo :
+
+Hướng dẫn:
+
+Display ==> Homepage ==> Structure and hierarchy ==> Split categories on index ==> Chọn Medium
+Display ==>Templates==>index\_box
+tìm
+
+```
+
+catrow.forumrow.L_LINKS}{catrow.forumrow.LINKS}
+```
+
+thay bằng
+
+```
+
+<div style="clear:both;">
+
+Unknown end tag for &lt;/div&gt;
+
+
+<div class="chiacmvds">{catrow.forumrow.L_LINKS}{catrow.forumrow.LINKS}
+
+Unknown end tag for &lt;/div&gt;
+
+
+```
+
+Modules ==> Javascript codes management ==> Create a new Javascript
+Title: Phân chuyên mục
+Placement: In the home page + In the sub-forums
+
+Cho đoạn Jquery này vào:
+```
+
+$(document).ready(function(){
+$("div.chiacmvds").each(function(index){
+cm = $(this).html();
+cm = cm.replace(/, /gi,'');
+$(this).html(cm);
+});
+$('div.chiacmvds:nth-child(even) a.gensmall:even').prev().wrap('<div class=imgcmvds_trai></div>');
+$('div.chiacmvds:nth-child(even) a.gensmall:odd').prev().wrap('<div class=imgcmvds_phai></div>');
+$('div.chiacmvds:nth-child(even) a.gensmall:even').wrap('<div class=cmvds_trai></div>');
+$('div.chiacmvds:nth-child(even) a.gensmall:odd').wrap('<div class=cmvds_phai></div>');
+
+$('div.chiacmvds:nth-child(odd) a.gensmall:even').prev().wrap('<div class=imgcmvds_trai></div>');
+$('div.chiacmvds:nth-child(odd) a.gensmall:odd').prev().wrap('<div class=imgcmvds_phai></div>');
+$('div.chiacmvds:nth-child(odd) a.gensmall:even').wrap('<div class=cmvds_trai></div>');
+$('div.chiacmvds:nth-child(odd) a.gensmall:odd').wrap('<div class=cmvds_phai></div>');
+});
+
+```
+Cho codes này vào css
+
+```
+
+.cmvds_trai{float:left;width:40%;height:15px;margin:1px 1px 7px;padding:2px;text-align:left;top:5px;left:5px;background-color:#5e9eff;}
+.cmvds_phai{float:right;width:40%;height:15px;margin:1px 1px 7px;padding:2px;text-align:right;top:5px;right:5px;background-color:#ff52f3;}
+.imgcmvds_trai{float:left;width:6%;height:15px;margin:1px;padding:4px 2px 0 0;text-align:right;top:5px;left:5px;background-color:#96ff61;}
+.imgcmvds_phai{float:right;width:6%;height:15px;margin:1px;padding:4px 0 0 2px;text-align:left;top:5px;right:5px;background-color:#96ff61;}
+.cmvds_trai,.cmvds_phai,.imgcmvds_trai,.imgcmvds_phai{position:relative;border:1px solid #8a8a8a;box-shadow: 2px -2px 2px #999;}
+.cmvds_trai:hover,.cmvds_phai:hover,.imgcmvds_trai:hover,.imgcmvds_phai:hover{transform: scale(1.2); -webkit-transform: scale(1.2); -moz-transform: scale(1.2);background-color:#fff200;text-align:center;font-weight:bold;font-size:12px;z-index:99;}
+
+```
+
+Annoidung
+nguồn :C
